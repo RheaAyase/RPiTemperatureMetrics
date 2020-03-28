@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>GrafanaTemp</RootNamespace>
+        <PublishSingleFile>true</PublishSingleFile>
+        <PublishTrimmed>true</PublishTrimmed>
+        <RuntimeIdentifier>linux-arm</RuntimeIdentifier>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Iot.Device.Bindings" Version="1.1.0-prerelease.20153.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+      <PackageReference Include="prometheus-net" Version="3.5.0" />
+      <PackageReference Include="System.Device.Gpio" Version="1.1.0-prerelease.20153.1" />
+    </ItemGroup>
+
+</Project>
