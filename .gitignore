@@ -3,8 +3,7 @@
 ## project specific:
 config.json
 config.json-*
-bin/Release
-bin/Debug
+bin/
 
 ## Laravel
 storage/framework/
