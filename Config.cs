@@ -9,13 +9,6 @@ namespace GrafanaTemp
 {
 	public class Config
 	{
-		public class Server
-		{
-			public guid GuildId;
-			public guid StatusChannelId;
-			public guid StatusMessageId;
-		}
-
 		public const string Filename = "config.json";
 
 		public float TargetFps = 0.03f;
@@ -31,15 +24,17 @@ namespace GrafanaTemp
 		{
 			string path = Filename;
 
+			Config config = new Config();
+			config.DeviceIds.Add("deviceId", ("gauge_name", "Description"));
 			if( !File.Exists(path) )
 			{
-				string json = JsonConvert.SerializeObject(new Config(), Formatting.Indented);
+				string json = JsonConvert.SerializeObject(config, Formatting.Indented);
 				File.WriteAllText(path, json);
 				Console.WriteLine("Default config created.");
 				Environment.Exit(0);
 			}
 
-			Config config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(path));
+			config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(path));
 			return config;
 		}
 
