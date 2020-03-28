@@ -11,21 +11,18 @@ namespace GrafanaTemp
 		private static Monitoring Monitoring;
 		private static Config Config;
 
-		private static CancellationTokenSource MainUpdateCancel;
-		private static Task MainUpdateTask;
+		private static readonly CancellationTokenSource MainUpdateCancel = new CancellationTokenSource();
 
-		static void Main(string[] args)
+		static async Task Main(string[] args)
 		{
 			Config = Config.Load();
 			Monitoring = new Monitoring(Config);
-			MainUpdateCancel = new CancellationTokenSource();
-			MainUpdateTask = Task.Factory.StartNew(MainUpdate, MainUpdateCancel.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
-			Console.WriteLine("Meep!");
-			MainUpdateTask.Wait();
+			await MainUpdate();
 		}
 
 		private static async Task MainUpdate()
 		{
+			Console.WriteLine("Meep!");
 			while( !MainUpdateCancel.IsCancellationRequested )
 			{
 				DateTime frameTime = DateTime.UtcNow;
