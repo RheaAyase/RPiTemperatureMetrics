@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 using guid = System.UInt64;
 
-namespace GrafanaTemp
+namespace RPiTemp
 {
 	public class Config
 	{

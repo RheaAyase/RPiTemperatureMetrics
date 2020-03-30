@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace>GrafanaTemp</RootNamespace>
+        <RootNamespace>RPiTemp</RootNamespace>
         <PublishSingleFile>true</PublishSingleFile>
         <PublishTrimmed>true</PublishTrimmed>
         <RuntimeIdentifier>linux-arm</RuntimeIdentifier>

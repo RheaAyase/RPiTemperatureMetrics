@@ -5,7 +5,7 @@ using Iot.Device.OneWire;
 using System.Threading.Tasks;
 using Iot.Device.Tm1637;
 
-namespace GrafanaTemp
+namespace RPiTemp
 {
 	static class Program
 	{

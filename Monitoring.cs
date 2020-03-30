@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Prometheus;
 
-namespace GrafanaTemp
+namespace RPiTemp
 {
 	public class Monitoring: IDisposable
 	{
