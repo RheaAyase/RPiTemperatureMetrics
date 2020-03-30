@@ -73,7 +73,7 @@ namespace RPiTemp
 		{
 			Display.ClearDisplay();
 
-			int temp = (int)temperature;
+			int temp = (int)Math.Round(temperature);
 			int digitCount = temp == 0 ? 1 : (int)Math.Floor(Math.Log10(Math.Abs(temp)) + 1);
 			if( digitCount < 1 || digitCount > 2 )
 				throw new ArgumentException($"Value {temp} is outside of expected range."); //Sanity
