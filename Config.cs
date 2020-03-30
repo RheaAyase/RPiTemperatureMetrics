@@ -11,16 +11,16 @@ namespace GrafanaTemp
 	{
 		public const string Filename = "config.json";
 
-		public float TargetFps = 0.03f;
+		public float TargetFps = 0.1f; // 1 in 10 seconds
 		public string PrometheusEndpoint = "";
 		public string PrometheusJob = "";
+		public string DeviceIdToDisplay = "";
+		public int DisplayClkPin = 21;
+		public int DisplayDataPin = 20;
 		/// <summary>
 		/// Dictionary of DeviceIDs as key and Prometheus gauge name & description as value.
 		/// </summary>
 		public Dictionary<string, (string, string)> DeviceIds = new Dictionary<string, (string, string)>();
-		public int DisplayClkPin = 21;
-		public int DisplayDataPin = 20;
-		public string DeviceIdToDisplay = "";
 
 		private Config(){}
 		public static Config Load()

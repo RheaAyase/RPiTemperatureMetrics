@@ -35,7 +35,19 @@ namespace GrafanaTemp
 
 				foreach( var dev in OneWireThermometerDevice.EnumerateDevices() )
 				{
-					double temp = (await dev.ReadTemperatureAsync()).Celsius;
+					double temp = 0;
+					try
+					{
+						temp = (await dev.ReadTemperatureAsync()).Celsius;
+					}
+					catch( InvalidOperationException )
+					{
+						continue;
+					}
+
+					if( Math.Abs(Math.Round(temp, 3)) < 0.002 )
+						continue;
+
 					if( dev.DeviceId == Config.DeviceIdToDisplay )
 					{
 						SetDisplay(temp);
