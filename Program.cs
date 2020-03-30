@@ -20,7 +20,7 @@ namespace RPiTemp
 			Config = Config.Load();
 			Monitoring = new Monitoring(Config);
 			Display = new Tm1637(Config.DisplayClkPin, Config.DisplayDataPin, PinNumberingScheme.Logical);
-			Display.Brightness = 7;
+			Display.Brightness = Config.DisplayBrightness;
 			Display.ScreenOn = true;
 			Display.ClearDisplay();
 			await MainUpdate();

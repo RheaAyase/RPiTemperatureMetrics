@@ -17,6 +17,7 @@ namespace RPiTemp
 		public string DeviceIdToDisplay = "";
 		public int DisplayClkPin = 21;
 		public int DisplayDataPin = 20;
+		public byte DisplayBrightness = 5;
 		/// <summary>
 		/// Dictionary of DeviceIDs as key and Prometheus gauge name & description as value.
 		/// </summary>
