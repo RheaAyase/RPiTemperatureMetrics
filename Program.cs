@@ -35,16 +35,22 @@ namespace GrafanaTemp
 
 				foreach( var dev in OneWireThermometerDevice.EnumerateDevices() )
 				{
+					double temp = (await dev.ReadTemperatureAsync()).Celsius;
 					if( dev.DeviceId == Config.DeviceIdToDisplay )
-						SetDisplay((await dev.ReadTemperatureAsync()).Celsius);
+					{
+						SetDisplay(temp);
+						await Task.Delay(100);
+					}
 
 					if( !Monitoring.Gauges.ContainsKey(dev.DeviceId) )
 					{
-						Console.WriteLine($"Temperature reported by '{dev.DeviceId}': " + (await dev.ReadTemperatureAsync()).Celsius.ToString("F2") + "\u00B0C");
+						Console.WriteLine($"Temperature reported by '{dev.DeviceId}': {temp:F2}\u00B0C");
+						await Task.Delay(1000);
 						continue;
 					}
 
-					Monitoring.Gauges[dev.DeviceId].Set((await dev.ReadTemperatureAsync()).Celsius);
+					Monitoring.Gauges[dev.DeviceId].Set(temp);
+					await Task.Delay(1000);
 				}
 
 				await Task.Delay(TimeSpan.FromMilliseconds(Math.Max(1, (TimeSpan.FromSeconds(1f / Config.TargetFps) - (DateTime.UtcNow - frameTime)).TotalMilliseconds)));
@@ -91,7 +97,7 @@ namespace GrafanaTemp
 						segments[i] = (Character)Enum.Parse(typeof(Character), $"Digit{digits[i]}");
 			}
 
-			if( temp > 0 || digitCount != 2 )
+			if( temp >= 0 || digitCount != 2 )
 			{
 				segments[2] = Character.SegmentTop | Character.SegmentTopLeft | Character.SegmentTopRight | Character.SegmentMiddle;
 				segments[3] = Character.C;
