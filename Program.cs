@@ -42,7 +42,11 @@ namespace RPiTemp
 					}
 					catch( InvalidOperationException )
 					{
-						continue;
+						continue; //Long cables sometimes cause hiccups and we don't need to spam logs.
+					}
+					catch( System.IO.DirectoryNotFoundException )
+					{
+						continue; //Long cables sometimes cause hiccups and we don't need to spam logs.
 					}
 
 					if( Math.Abs(Math.Round(temp, 3)) < 0.002 )
