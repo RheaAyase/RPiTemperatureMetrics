@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Device.Gpio;
 using System.Threading;
 using Iot.Device.OneWire;
@@ -12,6 +13,8 @@ namespace RPiTemp
 		private static Monitoring Monitoring;
 		private static Config Config;
 		private static Tm1637 Display;
+
+		private static readonly Dictionary<string, double> LastValidTemperature = new Dictionary<string, double>();
 
 		private static readonly CancellationTokenSource MainUpdateCancel = new CancellationTokenSource();
 
@@ -49,7 +52,17 @@ namespace RPiTemp
 						continue; //Long cables sometimes cause hiccups and we don't need to spam logs.
 					}
 
-					if( Math.Abs(Math.Round(temp, 3)) < 0.002 )
+					if( Math.Abs(temp) < 0.002 )
+						continue;
+
+					if( !LastValidTemperature.ContainsKey(dev.DeviceId) )
+					{
+						if( Math.Abs(temp) < 1 )
+							continue;
+						LastValidTemperature.Add(dev.DeviceId, temp);
+					}
+
+					if( Math.Abs(LastValidTemperature[dev.DeviceId] - temp) > 5 )
 						continue;
 
 					if( dev.DeviceId == Config.DeviceIdToDisplay )
