@@ -45,12 +45,21 @@ namespace RPiTemp
 					}
 					catch( InvalidOperationException )
 					{
+						if( Config.Debug )
+							Console.WriteLine($"Failed to read '{dev.DeviceId}'");
+
 						continue; //Long cables sometimes cause hiccups and we don't need to spam logs.
 					}
 					catch( System.IO.DirectoryNotFoundException )
 					{
+						if( Config.Debug )
+							Console.WriteLine($"Failed to read '{dev.DeviceId}'");
+
 						continue; //Long cables sometimes cause hiccups and we don't need to spam logs.
 					}
+
+					if( Config.Debug )
+						Console.WriteLine($"Temperature reported by '{dev.DeviceId}': {temp:F2}\u00B0C");
 
 					if( Math.Abs(temp) < 0.002 )
 						continue;

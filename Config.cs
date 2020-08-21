@@ -11,6 +11,7 @@ namespace RPiTemp
 	{
 		public const string Filename = "config.json";
 
+		public bool Debug = false;
 		public float TargetFps = 0.1f; // 1 in 10 seconds
 		public string PrometheusEndpoint = "";
 		public string PrometheusJob = "";
