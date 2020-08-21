@@ -62,8 +62,10 @@ namespace RPiTemp
 						LastValidTemperature.Add(dev.DeviceId, temp);
 					}
 
-					if( Math.Abs(LastValidTemperature[dev.DeviceId] - temp) > 10 )
+					if( Math.Abs(LastValidTemperature[dev.DeviceId] - temp) > 3 )
 						continue;
+
+					LastValidTemperature[dev.DeviceId] = temp;
 
 					if( dev.DeviceId == Config.DeviceIdToDisplay )
 					{
